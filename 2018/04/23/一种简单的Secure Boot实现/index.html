@@ -15,7 +15,7 @@
 <meta property="og:description" content="一种简单的Secure Boot实现 0. 关于secure bootSecure boot（安全启动）最早是由微软提出并实现的，它作为UEFI（Unified Extensible Firmware Interface）的一部分为PC启动阶段提供固件级的安全防护。随着嵌入式领域安全需求的日益增长，secure boot也被引入到嵌入式芯片设计中。我们假设一个场景：产品厂商（PV）从芯片厂商（CV">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://static.zybuluo.com/liugundam/4royro19klq06wvjj5octwm2/a.png">
-<meta property="og:updated_time" content="2018-04-23T12:55:08.104Z">
+<meta property="og:updated_time" content="2018-04-23T12:57:59.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="一种简单的Secure Boot实现 0. 关于secure bootSecure boot（安全启动）最早是由微软提出并实现的，它作为UEFI（Unified Extensible Firmware Interface）的一部分为PC启动阶段提供固件级的安全防护。随着嵌入式领域安全需求的日益增长，secure boot也被引入到嵌入式芯片设计中。我们假设一个场景：产品厂商（PV）从芯片厂商（CV">
@@ -104,8 +104,7 @@
 </li>
 </ul>
 <h2 id="2-完整的签名流程"><a href="#2-完整的签名流程" class="headerlink" title="2. 完整的签名流程"></a>2. 完整的签名流程</h2><ul>
-<li><p>PV用mkimage添加header。<br>命令如下：<br><code>mkimage -A arm -O linux -T kernel -C none -a XXXXXXXX \
--e XXXXXXXX -n &quot;Image&quot; -d image-sig.bin image-sig-header.bin</code><br>各个选项的含义可参考第1节中关于mkimage的说明。</p>
+<li><p>PV用mkimage添加header。<br>命令如下：<br><code>mkimage -A arm -O linux -T kernel -C none -a XXXXXXXX -e XXXXXXXX -n &quot;Image&quot; -d image-sig.bin image-sig-header.bin</code><br>各个选项的含义可参考第1节中关于mkimage的说明。</p>
 </li>
 <li><p>CV生成公钥和私钥。<br><code>gen-pubkey.sh &quot;chip vendor&quot; cv_romkey</code><br>生成公钥和私钥的同时，脚本也会输出含公钥信息的pubkeys结构体，CV将该信息写入bootrom代码中，并自行保管对应私钥。</p>
 </li>
