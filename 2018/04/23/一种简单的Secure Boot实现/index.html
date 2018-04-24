@@ -57,8 +57,7 @@
 </ul>
 <p><code>gen-pubkey.sh &quot;chip vendor&quot; cv_romkey</code><br>生成公钥和私钥的同时，脚本也会输出含公钥信息的pubkeys结构体，CV将该信息写入bootrom代码中，并自行保管对应私钥。</p>
 <ul>
-<li><p>PV生成公钥和私钥。</p>
-<p>PV生成自己的公钥和私钥，其中，私钥用于对image进行数字签名，公钥会附加在image中用于验证数字签名。命令如下：<br><code>gen-pubkey.sh &quot;product vendor&quot; pv</code><br><code>sign -C -p pv.pub -x pv.pub.bin  # 把public key转为bin</code><br>PV保管好自己的公钥和私钥，并把pv.pub.bin给CV。</p>
+<li><p>PV生成公钥和私钥。<br>PV生成自己的公钥和私钥，其中，私钥用于对image进行数字签名，公钥会附加在image中用于验证数字签名。命令如下：<br><code>gen-pubkey.sh &quot;product vendor&quot; pv</code><br><code>sign -C -p pv.pub -x pv.pub.bin  # 把public key转为bin</code><br>PV保管好自己的公钥和私钥，并把pv.pub.bin给CV。</p>
 </li>
 <li><p>CV用私钥为pv.pub.bin生成证书。</p>
 </li>
