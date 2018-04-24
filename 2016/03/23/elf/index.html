@@ -15,13 +15,12 @@
     
 
     
-    <title>Hello，ELF</title>
+    <title>ELF</title>
 </head>
 
 <body>
 
-<p>第一篇博客耶，好激动！！本人小白一枚，所以还是要例行公事地先跟World say 一声Hello : )。我只是单纯地觉得写博客很酷所以自己也想写，其实胸无点墨，根本不知道写啥，只能先从写写学习笔记做起吧。除了Linux笔者几乎没有接触过其他Unix实现，本文也主要是笔者对使用Linux过程中涉及到的ELF文件格式学习的一点儿总结。</p>
-<h2 id="ELF格式是个啥"><a href="#ELF格式是个啥" class="headerlink" title="ELF格式是个啥"></a>ELF格式是个啥</h2><p>ELF（Executable and Linkable Format）作为一种文件格式，最早是被UNIX系统实验室（USL）在大名鼎鼎的System V Release 4（SVR4）引入，可以说根正苗红。它后来被制定成标准主要是为了给开发者提供一套跨平台的二进制接口（ABI）。说白了，就是规定你的二进制文件里的内容要如何安排才能符合他的规范。</p>
+<h1 id="ELF"><a href="#ELF" class="headerlink" title="ELF"></a>ELF</h1><h2 id="ELF格式是个啥"><a href="#ELF格式是个啥" class="headerlink" title="ELF格式是个啥"></a>ELF格式是个啥</h2><p>ELF（Executable and Linkable Format）作为一种文件格式，最早是被UNIX系统实验室（USL）在大名鼎鼎的System V Release 4（SVR4）引入，可以说根正苗红。它后来被制定成标准主要是为了给开发者提供一套跨平台的二进制接口（ABI）。说白了，就是规定你的二进制文件里的内容要如何安排才能符合他的规范。</p>
 <h2 id="ELF文件里面有什么"><a href="#ELF文件里面有什么" class="headerlink" title="ELF文件里面有什么"></a>ELF文件里面有什么</h2><p>在Linux中有三种ELF格式的目标文件：可重定位文件（relocatable file）、可执行文件（excutable file）、共享目标文件（shared object file）。通俗的说可以对应于我们编译过程中所使用和生成的目标文件.o，链接后的可执行程序，以及共享库.so。<br>ELF文件提供两种视图（view），或者说可以从两种角度来看ELF文件的内容：链接期视图和执行期视图。<br>链接期视图就是我们在构建程序时看ELF文件里有什么，这种视图在构建过程中和静态地分析一个构建好的ELF文件是有效的。<br>执行期视图就是ELF在执行过程中展现出来的内容。<br>这两种视图信息，实际上都被包含在一个ELF文件中。只是在不同的阶段它表达了不同的信息。    </p>
 <table>
 <thead>
