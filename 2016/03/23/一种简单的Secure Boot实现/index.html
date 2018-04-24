@@ -15,12 +15,11 @@
     
 
     
-    <title></title>
+    <title>一种简单的Secure Boot实现</title>
 </head>
 
 <body>
 
-<h1 id="一种简单的Secure-Boot实现"><a href="#一种简单的Secure-Boot实现" class="headerlink" title="一种简单的Secure Boot实现"></a>一种简单的Secure Boot实现</h1><hr>
 <h2 id="0-关于secure-boot"><a href="#0-关于secure-boot" class="headerlink" title="0. 关于secure boot"></a>0. 关于secure boot</h2><p>Secure boot（安全启动）最早是由微软提出并实现的，它作为UEFI（Unified Extensible Firmware Interface）的一部分为PC启动阶段提供固件级的安全防护。随着嵌入式领域安全需求的日益增长，secure boot也被引入到嵌入式芯片设计中。<br>我们假设一个场景：产品厂商（PV）从芯片厂商（CV）采购了一批嵌入式芯片，并在芯片上开发产品。在产品发布或升级时，PV需要将自己的代码image（定制的os、app…）烧写到可擦写的存储设备（flash、mmc…）上。如果该image被被注入了恶意代码，也被烧写到存储设备上，系统启动时芯片在不知情的情况下执行了恶意代码，就会造成厂商及用户的损失。有一种解决办法是：创建一个系统启动的信任链。在芯片出厂时由芯片厂商提供信任根，存储在不可擦写的存储介质（bootrom、E-fuse…）。系统的安全启动以此为基础，按照信任链的顺序一级级确保启动的可靠性。这个信任链上的每一级都需要采用非对称加密技术（不同的公钥和私钥），通过公钥认证来实现，它具备以下安全特性：</p>
 <ol>
 <li>禁止运行未经授权的官方固件；</li>
@@ -71,7 +70,7 @@
 <h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>这里我们没有讨论具体的哈希算法和数字签名算法的具体实现（sign和验证工具），因为这些算法是公开的，也有官方的开源代码：<a href="https://en.wikipedia.org/wiki/BLAKE_%28hash_function%29" target="_blank" rel="noopener">blake2s算法</a> <a href="http://ed25519.cr.yp.to/index.html" target="_blank" rel="noopener">ED25519算法</a> <a href="https://bench.cr.yp.to/supercop.html" target="_blank" rel="noopener">算法实现</a><br>secure boot的技术基础是数字签名，而数字签名的可靠性是基于当前的密码学可靠性，因此我们可以相信，本文所采用的技术可以在一定程度上确保芯片运行的可信性。</p>
 
 
-<!--<a href="http://yoursite.com/2018/04/23/一种简单的Secure Boot实现/#disqus_thread" class="article-comment-link">Comments</a>-->
+<!--<a href="http://yoursite.com/2016/03/23/一种简单的Secure Boot实现/#disqus_thread" class="article-comment-link">Comments</a>-->
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
