@@ -20,6 +20,7 @@
 
 <body>
 
+<h1 id="一种简单的Secure-Boot实现"><a href="#一种简单的Secure-Boot实现" class="headerlink" title="一种简单的Secure Boot实现"></a>一种简单的Secure Boot实现</h1><hr>
 <h2 id="0-关于secure-boot"><a href="#0-关于secure-boot" class="headerlink" title="0. 关于secure boot"></a>0. 关于secure boot</h2><p>Secure boot（安全启动）最早是由微软提出并实现的，它作为UEFI（Unified Extensible Firmware Interface）的一部分为PC启动阶段提供固件级的安全防护。随着嵌入式领域安全需求的日益增长，secure boot也被引入到嵌入式芯片设计中。<br>我们假设一个场景：产品厂商（PV）从芯片厂商（CV）采购了一批嵌入式芯片，并在芯片上开发产品。在产品发布或升级时，PV需要将自己的代码image（定制的os、app…）烧写到可擦写的存储设备（flash、mmc…）上。如果该image被被注入了恶意代码，也被烧写到存储设备上，系统启动时芯片在不知情的情况下执行了恶意代码，就会造成厂商及用户的损失。有一种解决办法是：创建一个系统启动的信任链。在芯片出厂时由芯片厂商提供信任根，存储在不可擦写的存储介质（bootrom、E-fuse…）。系统的安全启动以此为基础，按照信任链的顺序一级级确保启动的可靠性。这个信任链上的每一级都需要采用非对称加密技术（不同的公钥和私钥），通过公钥认证来实现，它具备以下安全特性：</p>
 <ol>
 <li>禁止运行未经授权的官方固件；</li>
