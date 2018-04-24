@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+      <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2"/>
+    
+
+    
+    <title>My First Experience of LFS</title>
+</head>
+
+<body>
+
+<h1 id="对于首次LFS的小白，需要注意的事项："><a href="#对于首次LFS的小白，需要注意的事项：" class="headerlink" title="对于首次LFS的小白，需要注意的事项："></a>对于首次LFS的小白，需要注意的事项：</h1><ul>
+<li>在完成“Constructing a Temporary System”后，每次进入chroot环境前别忘了“Mounting and Populating /dev”和“Mounting Virtual Kernel File Systems”，然后chroot：“chroot “$LFS” /tools/bin/env -i \<br>  HOME=/root                  \<br>  TERM=”$TERM”                \<br>  PS1=’\u:\w\$ ‘              \<br>  PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \<br>  /tools/bin/bash –login +h”。在/bin/bash构建完成后，最后一行命令需换成“/bin/bash –login +h”。在系统软件全部完成安装后，把命令行中关于/tools的全部去掉或替换成根目录。</li>
+<li>在“Installing Basic System Software”一章中最重要的一个思想是：在chroot环境下，一旦你完成一个系统软件的安装后，立即在当前环境使用它，而不是继续使用前一章构建的/tools下的工具。例如，在安装好bash后立即执行<strong><em>exec /bin/bash –login +h</em></strong>切换到新安装的shell环境中。其他软件不需要显示进行类似的操作，因为在chroot环境中，已经在PATH变量中把“/bin:/usr/bin:/sbin:/usr/sbin”设置在/tools的前面。</li>
+</ul>
+
+
+<!--<a href="http://yoursite.com/2016/04/10/Toolchain in LFS/#disqus_thread" class="article-comment-link">Comments</a>-->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

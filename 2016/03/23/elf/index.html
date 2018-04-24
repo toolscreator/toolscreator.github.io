@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+
+    
+      <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2"/>
+    
+
+    
+    <title>Hello，ELF</title>
+</head>
+
+<body>
+
+<p>第一篇博客耶，好激动！！本人小白一枚，所以还是要例行公事地先跟World say 一声Hello : )。我只是单纯地觉得写博客很酷所以自己也想写，其实胸无点墨，根本不知道写啥，只能先从写写学习笔记做起吧。除了Linux笔者几乎没有接触过其他Unix实现，本文也主要是笔者对使用Linux过程中涉及到的ELF文件格式学习的一点儿总结。</p>
+<h2 id="ELF格式是个啥"><a href="#ELF格式是个啥" class="headerlink" title="ELF格式是个啥"></a>ELF格式是个啥</h2><p>ELF（Executable and Linkable Format）作为一种文件格式，最早是被UNIX系统实验室（USL）在大名鼎鼎的System V Release 4（SVR4）引入，可以说根正苗红。它后来被制定成标准主要是为了给开发者提供一套跨平台的二进制接口（ABI）。说白了，就是规定你的二进制文件里的内容要如何安排才能符合他的规范。</p>
+<h2 id="ELF文件里面有什么"><a href="#ELF文件里面有什么" class="headerlink" title="ELF文件里面有什么"></a>ELF文件里面有什么</h2><p>在Linux中有三种ELF格式的目标文件：可重定位文件（relocatable file）、可执行文件（excutable file）、共享目标文件（shared object file）。通俗的说可以对应于我们编译过程中所使用和生成的目标文件.o，链接后的可执行程序，以及共享库.so。<br>ELF文件提供两种视图（view），或者说可以从两种角度来看ELF文件的内容：链接期视图和执行期视图。<br>链接期视图就是我们在构建程序时看ELF文件里有什么，这种视图在构建过程中和静态地分析一个构建好的ELF文件是有效的。<br>执行期视图就是ELF在执行过程中展现出来的内容。<br>这两种视图信息，实际上都被包含在一个ELF文件中。只是在不同的阶段它表达了不同的信息。    </p>
+<table>
+<thead>
+<tr>
+<th>Link view</th>
+<th>Execution View</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ELF Header</td>
+<td>ELF Header</td>
+<td></td>
+</tr>
+<tr>
+<td>Program Header table</td>
+<td>Segment 1</td>
+<td></td>
+</tr>
+<tr>
+<td>section</td>
+<td>Segment 2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="输出到ELF文件"><a href="#输出到ELF文件" class="headerlink" title="输出到ELF文件"></a>输出到ELF文件</h2><p>既然ELF就是规定的一种格式，那我们就按照他给的API往一个空文件里面写他要求的东西就好了。</p>
+
+
+<!--<a href="http://yoursite.com/2016/03/23/elf/#disqus_thread" class="article-comment-link">Comments</a>-->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=&web_id=" language="JavaScript"></script>script>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>
