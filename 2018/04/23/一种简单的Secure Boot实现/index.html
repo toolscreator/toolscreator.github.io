@@ -50,12 +50,11 @@
 <h2 id="2-完整的签名流程"><a href="#2-完整的签名流程" class="headerlink" title="2. 完整的签名流程"></a>2. 完整的签名流程</h2><ul>
 <li>PV用mkimage添加header。</li>
 </ul>
-<p>命令如下：<br><code>mkimage -A arm -O linux -T kernel -C none -a XXXXXXXX \
--e XXXXXXXX -n &quot;Image&quot; -d image-sig.bin image-sig-header.bin</code><br>各个选项的含义可参考第1节中关于mkimage的说明。</p>
+<p>命令如下：<br><code>mkimage -A arm -O linux -T kernel -C none -a XXXXXXXX -e XXXXXXXX -n &quot;Image&quot; -d image-sig.bin image-sig-header.bin</code><br>各个选项的含义可参考第1节中关于mkimage的说明。</p>
 <ul>
 <li>CV生成公钥和私钥。</li>
 </ul>
-<p><code>gen-pubkey.sh &quot;chip vendor&quot; cv_romkey</code><br>生成公钥和私钥的同时，脚本也会输出含公钥信息的pubkeys结构体，CV将该信息写入bootrom代码中，并自行保管对应私钥。</p>
+<p>命令如下：<br> <code>gen-pubkey.sh &quot;chip vendor&quot; cv_romkey</code><br>生成公钥和私钥的同时，脚本也会输出含公钥信息的pubkeys结构体，CV将该信息写入bootrom代码中，并自行保管对应私钥。</p>
 <ul>
 <li><p>PV生成公钥和私钥。<br>PV生成自己的公钥和私钥，其中，私钥用于对image进行数字签名，公钥会附加在image中用于验证数字签名。命令如下：<br><code>gen-pubkey.sh &quot;product vendor&quot; pv</code><br><code>sign -C -p pv.pub -x pv.pub.bin  # 把public key转为bin</code><br>PV保管好自己的公钥和私钥，并把pv.pub.bin给CV。</p>
 </li>
