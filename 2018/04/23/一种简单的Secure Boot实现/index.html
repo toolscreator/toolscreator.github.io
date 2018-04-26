@@ -56,10 +56,11 @@
 </ul>
 <p>命令如下：<br> <code>gen-pubkey.sh &quot;chip vendor&quot; cv_romkey</code><br>生成公钥和私钥的同时，脚本也会输出含公钥信息的pubkeys结构体，CV将该信息写入bootrom代码中，并自行保管对应私钥。</p>
 <ul>
-<li><p>PV生成公钥和私钥。<br>PV生成自己的公钥和私钥，其中，私钥用于对image进行数字签名，公钥会附加在image中用于验证数字签名。命令如下：<br><code>gen-pubkey.sh &quot;product vendor&quot; pv</code><br><code>sign -C -p pv.pub -x pv.pub.bin  # 把public key转为bin</code><br>PV保管好自己的公钥和私钥，并把pv.pub.bin给CV。</p>
-</li>
-<li><p>CV用私钥为pv.pub.bin生成证书。</p>
-</li>
+<li>PV生成公钥和私钥。</li>
+</ul>
+<p>命令如下：<br><code>gen-pubkey.sh &quot;product vendor&quot; pv</code><br>PV使用该命令生成自己的公钥和私钥：私钥用于对image进行数字签名，公钥会附加在image中用于验证数字签名。通过下面的命令将public key转为bin：<br><code>sign -C -p pv.pub -x pv.pub.bin</code><br>PV保管好自己的公钥和私钥，并把pv.pub.bin给CV。</p>
+<ul>
+<li>CV用私钥为pv.pub.bin生成证书。</li>
 </ul>
 <p>这里CV充当的是CA（Certificate Authority）的角色，命令如下：<br><code>cryptotool -m pkcert -k X -v 0xXX -r cv_romkey.sec -p pv.pub.bin -o pv.pkcert</code><br>其中，-m指定模式pkcert，-k和-v分别指定key_index和pv_id，他们可以在bootrom中索引CV给该厂商分配公钥，该公钥和-r指定的私钥cv_romkey.sec配对，-p指定的是厂家提供的公钥文件。CV把key_index、pv_id、pv.pkcert给PV。key_index和pv_id用于烧写efuse，pv.pkcert则会附加到image的最后，用于验证pv.pub的安全性。</p>
 <ul>
